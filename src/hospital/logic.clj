@@ -50,7 +50,9 @@
    :post [(= (+ (count (de hospital)) (count (para hospital)))
              (+ (count (de %)) (count (para %))))]
    }
-  (let [pessoa (peek (get hospital de))]
-    (-> hospital
-        (atende de)
-        (chega-em para pessoa))))
+  (if (not-empty (de hospital))
+    (let [pessoa (peek (get hospital de))]
+      (-> hospital
+          (atende de)
+          (chega-em para pessoa)))
+    hospital))
